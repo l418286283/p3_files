@@ -1,7 +1,8 @@
- ptr;
+intptr ptr;
 int val;
- d;
- d;
- x;
- y;
- g;
+intptr d;
+bool d;
+boo1ptr x;
+char y;
+charptr g;
+void

@@ -156,6 +156,15 @@ private:
 	IDNode * myId;
 };
 
+class VarDeclListNode : public ASTNode{
+public:
+	VarDeclListNode(std::list<VarDeclNode *> * decls)
+	: ASTNode(0, 0), myDecls(decls){ }
+	virtual void unparse(std::ostream&, int);
+private:
+	std::list<VarDeclNode *> * myDecls;
+};
+
 class IntTypeNode : public TypeNode{
 public:
 	IntTypeNode(size_t lineIn, size_t colIn, bool isRefIn)
@@ -518,8 +527,6 @@ private:
 	CallExpNode * myCallExp;
 };
 
-
-
 class FormalDeclNode : public VarDeclNode{
 public:
 	FormalDeclNode(TypeNode * type, IDNode * id)
@@ -528,6 +535,36 @@ public:
 	virtual TypeNode * getTypeNode() { return myType; }
 private:
 	TypeNode * myType;
+};
+
+class FormalsListNode : public ASTNode{
+public:
+	FormalsListNode(std::list<FormalDeclNode *>* formalsIn)
+	: ASTNode(0, 0), myFormals(formalsIn){ }
+	void unparse(std::ostream& out, int indent) override;
+	std::list<FormalDeclNode *> * GetFormals();
+private:
+	std::list<FormalDeclNode *> * myFormals;
+};
+
+class StmtListNode : public ASTNode{
+public:
+	StmtListNode(std::list<StmtNode *> * stmtsIn)
+	: ASTNode(0,0), myStmts(stmtsIn){ }
+	void unparse(std::ostream& out, int indent) override;
+private:
+	std::list<StmtNode *> * myStmts;
+};
+
+class FnBodyNode : public ASTNode{
+public:
+	FnBodyNode(size_t lineIn, size_t colIn, StmtListNode * stmts)
+	: ASTNode(lineIn, colIn){
+		myStmtList = stmts;
+	}
+	void unparse(std::ostream& out, int indent) override;
+private:
+	StmtListNode * myStmtList;
 };
 
 /*class FnDeclNode
@@ -540,8 +577,8 @@ public:
 	FnDeclNode(
 		TypeNode * re,
 		IDNode * id,
-		std::list<FormalDeclNode * > * formals,
-		std::list<StmtNode * > * fnBody)
+		FormalsListNode * formals,
+		FnBodyNode * fnBody)
 		: DeclNode(id->line(),id->col())
 	{
 		myFormals = formals;
@@ -551,9 +588,9 @@ public:
 	TypeNode * getReturnTypeNode(){ return myRe; }
 	void unparse(std::ostream& out, int indent) override;
 private:
+	FormalsListNode * myFormals;
+	FnBodyNode * myBody;
 	TypeNode * myRe;
-	std::list<FormalDeclNode * > * myFormals;
-	std::list<StmtNode * > * myBody;
 };
 
 /*class FromConsoleStmtNode
@@ -591,12 +628,10 @@ public:
 	: StmtNode(lineIn, colIn){
 		myExp = exp;
 		myStmts = stmts;
-		//myDecls = decls;
 	}
 	void unparse(std::ostream& out, int indent) override;
 private:
 	ExpNode * myExp;
-	//VarDeclListNode * myDecls;
 	std::list<StmtNode * > * myStmts;
 };
 
@@ -609,17 +644,13 @@ public:
 	IfElseStmtNode(ExpNode * exp, std::list<StmtNode * > * stmtsT, std::list<StmtNode * > * stmtsF)
 	: StmtNode(exp->line(), exp->col()){
 		myExp = exp;
-		//myDeclsT = declsT;
 		myStmtsT = stmtsT;
-		//myDeclsF = declsF;
 		myStmtsF = stmtsF;
 	}
 	void unparse(std::ostream& out, int indent) override;
 private:
 	ExpNode * myExp;
-	//VarDeclListNode * myDeclsT;
 	std::list<StmtNode * > * myStmtsT;
-	//VarDeclListNode * myDeclsF;
 	std::list<StmtNode * > * myStmtsF;
 };
 
@@ -631,13 +662,11 @@ public:
 	WhileStmtNode(size_t lineIn, size_t colIn, ExpNode * exp, std::list<StmtNode * > * stmts)
 	: StmtNode(lineIn, colIn){
 		myExp = exp;
-		//myDecls = decls;
 		myStmts = stmts;
 	}
 	void unparse(std::ostream& out, int indent) override;
 private:
 	ExpNode * myExp;
-	//VarDeclListNode * myDecls;
 	std::list<StmtNode * > * myStmts;
 };
 
