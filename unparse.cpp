@@ -48,12 +48,13 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 
-
+void DerefNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "@";
+	myTgt->unparse(out,0);
+}
 
 /*
-WhileStmtNode
-ReturnStmtNode
-
 MinusNode
 PlusNode
 TimesNode
@@ -69,10 +70,17 @@ LessEqNode
 */
 
 //UnaryExpNode
-//NegNode
-//NotNode
+/*
+void NegNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "-";
+}
+void NotNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 
-
+	out << "!";
+}
+*/
 //StmtNode
 void AssignStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
@@ -102,20 +110,15 @@ void FnDeclNode::unparse(std::ostream& out, int indent){
 }
 
 void FormalDeclNode::unparse(std::ostream& out, int indent){
-
+	doIndent(out, indent);
+	myType->unparse(out, 0);
+	out << " " << getTypeNode();
 }
 
 void FromConsoleStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	out<<"FROMCONSOLE";
 	myVal->unparse(out, 0);
-	out<<";\n";
-}
-
-void ToConsoleStmtNode::unparse(std::ostream& out, int indent){
-	doIndent(out, indent);
-	out<<"TOCONSOLE";
-	myExp->unparse(out, 0);
 	out<<";\n";
 }
 
@@ -131,9 +134,46 @@ void IfStmtNode::unparse(std::ostream& out, int indent){
 }
 
 void IfElseStmtNode::unparse(std::ostream& out, int indent){
-
+	doIndent(out, indent);
+	out << "if(";
+	myExp->unparse(out,0);
+	out << ") {\n";
+	for (auto s: *myStmtsT)
+		s->unparse(out, indent+1);
+	doIndent(out, indent);
+	for (auto s: *myStmtsF)
+		s->unparse(out, indent+1);
+	doIndent(out, indent);
+	out << "}\n";
 
 }
+
+void ToConsoleStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out<<"TOCONSOLE";
+	myExp->unparse(out, 0);
+	out<<";\n";
+}
+
+void WhileStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "while(";
+	myExp->unparse(out,0);
+	out << ") {\n";
+	for (auto s: *myStmts)
+		s->unparse(out, indent+1);
+	doIndent(out, indent);
+	out << "}\n";
+}
+
+void ReturnStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out<<"return";
+
+	if(myExp != nullptr){ myExp->unparse(out, 0); }
+	out<<";\n";
+}
+
 
 void PostDecStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
@@ -166,7 +206,7 @@ void BoolTypeNode::unparse(std::ostream& out, int indent){
 }
 
 void BoolPtrNode::unparse(std::ostream& out, int indent){
-	out << "boo1ptr";
+	out << "boolptr";
 }
 
 void CharTypeNode::unparse(std::ostream& out, int indent){
@@ -185,14 +225,31 @@ void NullPtrNode::unparse(std::ostream& out, int indent){
 	out << "NULLPTR";
 }
 
-/*
-IntLitNode
-StrLitNode
-CharLitNode
-*/
+
+void IntLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << myInt;
+}
+
+void StrLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << myString;
+}
+
+void CharLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << myChar;
+}
+
+
 void TrueNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	out << "true";
+}
+
+void FalseNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "false";
 }
 
 
