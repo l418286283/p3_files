@@ -534,9 +534,29 @@ private:
 
 /*class FromConsoleStmtNode
 	- LValNode (the variable/field that will receive the input)*/
+class FromConsoleStmtNode : public StmtNode{
+public:
+	FromConsoleStmtNode(size_t lineIn, size_t colIn, LValNode * val)
+	: StmtNode(lineIn, colIn){
+		myVal = val;
+	}
+	void unparse(std::ostream& out, int indent) override;
+private:
+	LValNode * myVal;
+};
 
 /*class ToConsoleStmtNode
 	- ExpNode (the expression to output)*/
+class ToConsoleStmtNode : public StmtNode{
+public:
+	ToConsoleStmtNode(size_t lineIn, size_t colIn, ExpNode * exp)
+	: StmtNode(lineIn, colIn){
+		myExp = exp;
+	}
+	void unparse(std::ostream& out, int indent) override;
+private:
+	ExpNode * myExp;
+};
 
 /*class IfStmtNode
 	- ExpNode (the condition being evaluated)
