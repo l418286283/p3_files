@@ -54,9 +54,6 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 WhileStmtNode
 ReturnStmtNode
 
-CallStmtNode
-
-AssignExpNode
 MinusNode
 PlusNode
 TimesNode
@@ -70,6 +67,7 @@ GreaterEqNode
 LessNode
 LessEqNode
 */
+
 //UnaryExpNode
 //NegNode
 //NotNode
@@ -88,36 +86,48 @@ void CallStmtNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 //DeclNode
-
 void FnDeclNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	myRe->unparse(out,0);
 	out << " ";
 	out<< getReturnTypeNode();
 	out << "(";
-	for (auto param: *myFormals)
-			param->unparse(out, 0);
+	for (auto f: *myFormals)
+			f->unparse(out, 0);
 	out << ")";
-	for (auto line: *myBody){
-		line->unparse(out, indent + 1);
+	for (auto b: *myBody){
+		b->unparse(out, indent + 1);
 }
 
 }
-/*
+
 void FormalDeclNode::unparse(std::ostream& out, int indent){
 
 }
 
 void FromConsoleStmtNode::unparse(std::ostream& out, int indent){
-
+	doIndent(out, indent);
+	out<<"FROMCONSOLE";
+	myVal->unparse(out, 0);
+	out<<";\n";
 }
 
 void ToConsoleStmtNode::unparse(std::ostream& out, int indent){
-
+	doIndent(out, indent);
+	out<<"TOCONSOLE";
+	myExp->unparse(out, 0);
+	out<<";\n";
 }
-*/
-void IfStmtNode::unparse(std::ostream& out, int indent){
 
+void IfStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "if(";
+	myExp->unparse(out,0);
+	out << ") {\n";
+	for (auto s: *myStmts)
+		s->unparse(out, indent+1);
+	doIndent(out, indent);
+	out << "}\n";
 }
 
 void IfElseStmtNode::unparse(std::ostream& out, int indent){
@@ -126,11 +136,15 @@ void IfElseStmtNode::unparse(std::ostream& out, int indent){
 }
 
 void PostDecStmtNode::unparse(std::ostream& out, int indent){
-
+	doIndent(out, indent);
+	myExp->unparse(out, 0);
+	out<<"--;\n";
 }
 
 void PostIncStmtNode::unparse(std::ostream& out, int indent){
-
+	doIndent(out, indent);
+	myExp->unparse(out, 0);
+	out<<"++;\n";
 }
 
 
@@ -143,12 +157,24 @@ void IntTypeNode::unparse(std::ostream& out, int indent){
 	out << "int";
 }
 
+void IntPtrNode::unparse(std::ostream& out, int indent){
+	out << "intptr";
+}
+
 void BoolTypeNode::unparse(std::ostream& out, int indent){
 	out << "bool";
 }
 
+void BoolPtrNode::unparse(std::ostream& out, int indent){
+	out << "boo1ptr";
+}
+
 void CharTypeNode::unparse(std::ostream& out, int indent){
 	out << "char";
+}
+
+void CharPtrNode::unparse(std::ostream& out, int indent){
+	out << "charptr";
 }
 
 void VoidTypeNode::unparse(std::ostream& out, int indent){
@@ -158,15 +184,16 @@ void VoidTypeNode::unparse(std::ostream& out, int indent){
 void NullPtrNode::unparse(std::ostream& out, int indent){
 	out << "NULLPTR";
 }
-/*
-FormalDeclNode
 
+/*
 IntLitNode
 StrLitNode
 CharLitNode
-TrueNode
 */
-
+void TrueNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "true";
+}
 
 
 } // End namespace holeyc
