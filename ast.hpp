@@ -190,6 +190,30 @@ public:
 	void unparse(std::ostream& out, int indent);
 };
 
+class IntPtrNode : public TypeNode{
+public:
+	IntPtrNode(size_t lineIn, size_t colIn, bool isRefIn)
+	: TypeNode(lineIn, colIn, isRefIn){
+	}
+	void unparse(std::ostream& out, int indent);
+};
+
+class CharPtrNode : public TypeNode{
+public:
+	CharPtrNode(size_t lineIn, size_t colIn, bool isRefIn)
+	: TypeNode(lineIn, colIn, isRefIn){
+	}
+	void unparse(std::ostream& out, int indent);
+};
+
+class BoolPtrNode : public TypeNode{
+public:
+	BoolPtrNode(size_t lineIn, size_t colIn, bool isRefIn)
+	: TypeNode(lineIn, colIn, isRefIn){
+	}
+	void unparse(std::ostream& out, int indent);
+};
+
 //ExpNode
 /*class AssignExpNode
 	- LValNode (destination lvalue)
