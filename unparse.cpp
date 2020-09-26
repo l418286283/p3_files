@@ -48,9 +48,6 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 
-void FnDeclNode::unparse(std::ostream& out, int indent){
-
-}
 
 
 /*
@@ -87,14 +84,26 @@ void AssignStmtNode::unparse(std::ostream& out, int indent){
 
 void CallStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	//myAssign->unparse(out,0);
+	myCallExp->unparse(out,0);
 	out << ";\n";
 }
 //DeclNode
-/*
+
 void FnDeclNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	myRe->unparse(out,0);
+	out << " ";
+	out<< getReturnTypeNode();
+	out << "(";
+	for (auto param: *myFormals)
+			param->unparse(out, 0);
+	out << ")";
+	for (auto line: *myBody){
+		line->unparse(out, indent + 1);
+}
 
 }
+/*
 void FormalDeclNode::unparse(std::ostream& out, int indent){
 
 }
