@@ -48,27 +48,6 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 
-void DerefNode::unparse(std::ostream& out, int indent){
-	doIndent(out, indent);
-	out << "@";
-	myTgt->unparse(out,0);
-}
-
-/*
-MinusNode
-PlusNode
-TimesNode
-DivideNode
-AndNode
-OrNode
-EqualsNode
-NotEqualsNode
-GreaterNode
-GreaterEqNode
-LessNode
-LessEqNode
-*/
-
 //UnaryExpNode
 /*
 void NegNode::unparse(std::ostream& out, int indent){
@@ -88,6 +67,15 @@ void AssignStmtNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 
+void BinaryExpNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	myLHS->unparse(out,0);
+	out << myOp();
+	myRHS->unparse(out,0);
+	out << ")";
+}
+
 void CallStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	myCallExp->unparse(out,0);
@@ -100,12 +88,10 @@ void FnDeclNode::unparse(std::ostream& out, int indent){
 	out << " ";
 	out<< getReturnTypeNode();
 	out << "(";
-	for (auto f: *myFormals)
-			f->unparse(out, 0);
+	myFormals->unparse(out, 0);
 	out << ")";
-	for (auto b: *myBody){
-		b->unparse(out, indent + 1);
-}
+	myBody->unparse(out, 0);
+
 
 }
 
@@ -250,6 +236,26 @@ void TrueNode::unparse(std::ostream& out, int indent){
 void FalseNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	out << "false";
+}
+
+void DerefNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "@";
+	myTgt->unparse(out,0);
+}
+
+void RefNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "^";
+	myTgt->unparse(out,0);
+}
+
+void IndexNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	myTgt->unparse(out,0);
+	out << "[";
+	myOff->unparse(out,0);
+	out << "]";
 }
 
 

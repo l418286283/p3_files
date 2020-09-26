@@ -401,11 +401,11 @@ lval		: id
 		  }
 		| AT id
 		  {
-		  $$ = new RefNode($2->line(), $2->col(), $2);
+		  $$ = new DerefNode($2->line(), $2->col(), $2);
 		  }
 		| CARAT id
 		  {
-		  $$ = new DerefNode($2->line(), $2->col(), $2);
+		  $$ = new RefNode($2->line(), $2->col(), $2);
 		  }
 
 id		: ID
