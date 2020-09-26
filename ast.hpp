@@ -485,9 +485,9 @@ protected:
 	ExpNode * myExp;
 };
 
-class UnaryMinusNode : public UnaryExpNode{
+class NegNode : public UnaryExpNode{
 public:
-	UnaryMinusNode(ExpNode * exp)
+	NegNode(ExpNode * exp)
 	: UnaryExpNode(exp->line(), exp->col(), exp){ }
 	void unparse(std::ostream& out, int indent) override;
 };

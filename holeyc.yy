@@ -346,7 +346,7 @@ exp		: assignExp
 		| NOT exp
 		  {$$ = new NotNode($2->line(), $2->col(), $2); }
 		| DASH term
-		  {$$ = new UnaryMinusNode($2); }
+		  {$$ = new NegNode($2); }
 		| term
 		  {$$ = $1; }
 
