@@ -404,7 +404,7 @@ public:
 	(no extra fields needed beyond superclass)*/
 class NullPtrNode : public ExpNode{
 public:
-	AssignExpNode(size_t lineIn, size_t colIn)
+	NullPtrNode(size_t lineIn, size_t colIn)
 	: ExpNode(lineIn, colIn){ }
 	void unparse(std::ostream& out, int indent) override;
 };
@@ -499,7 +499,7 @@ private:
 class FormalDeclNode : public VarDeclNode{
 public:
 	FormalDeclNode(TypeNode * type, IDNode * id)
-	: DeclNode(id->line(), id->col(), id), myType(type){ }
+	: VarDeclNode(id->line(), id->col(), type, id), myType(type){ }
 	void unparse(std::ostream& out, int indent) override;
 	virtual TypeNode * getTypeNode() { return myType; }
 private:
@@ -518,13 +518,13 @@ public:
 		IDNode * id,
 		std::list<FormalDeclNode * > * formals,
 		std::list<StmtNode * > * fnBody)
-		: DeclNode(id->line(),id->col(), id)
+		: DeclNode(id->line(),id->col())
 	{
 		myFormals = formals;
 		myBody = fnBody;
 		myRe = re;
 	}
-	TypeNode * getReturnTypeNode(){ return myRetAST; }
+	TypeNode * getReturnTypeNode(){ return myRe; }
 	void unparse(std::ostream& out, int indent) override;
 private:
 	TypeNode * myRe;
@@ -604,7 +604,7 @@ public:
 	PostIncStmtNode(ExpNode * exp)
 	: StmtNode(exp->line(), exp->col()){
 		if (exp->line() == 0){
-			throw InternalError("0 pos");
+			throw std::runtime_error("0 pos");
 		}
 		myExp = exp;
 	}
