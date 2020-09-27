@@ -31,11 +31,11 @@ void AssignExpNode::unparse(std::ostream& out, int indent){
 
 void BinaryExpNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << "(";
+	//out << "(";
 	myLHS->unparse(out,0);
 	out << myOp();
 	myRHS->unparse(out,0);
-	out << ")";
+	//out << ")";
 }
 
 void CallExpNode::unparse(std::ostream& out, int indent){
@@ -104,7 +104,6 @@ void UnaryExpNode::unparse(std::ostream& out, int indent){
 	out << "(";
 	myExp->unparse(out,0);
 	out << ")";
-
 }
 
 void NegNode::unparse(std::ostream& out, int indent){

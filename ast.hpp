@@ -299,7 +299,7 @@ public:
 	AndNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return " and "; }
+	virtual std::string myOp() override { return " && "; }
 };
 
 class OrNode : public BinaryExpNode{
@@ -307,7 +307,7 @@ public:
 	OrNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return " or "; }
+	virtual std::string myOp() override { return " || "; }
 };
 
 class EqualsNode : public BinaryExpNode{
