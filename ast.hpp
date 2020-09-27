@@ -267,7 +267,7 @@ public:
 	PlusNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs) { }
-	virtual std::string myOp() override { return "+"; }
+	virtual std::string myOp() override { return " + "; }
 };
 
 class MinusNode : public BinaryExpNode{
@@ -275,7 +275,7 @@ public:
 	MinusNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return "-"; }
+	virtual std::string myOp() override { return " - "; }
 };
 
 class TimesNode : public BinaryExpNode{
@@ -283,7 +283,7 @@ public:
 	TimesNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return "*"; }
+	virtual std::string myOp() override { return " * "; }
 };
 
 class DivideNode : public BinaryExpNode{
@@ -291,7 +291,7 @@ public:
 	DivideNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return "/"; }
+	virtual std::string myOp() override { return " / "; }
 };
 
 class AndNode : public BinaryExpNode{
@@ -299,7 +299,7 @@ public:
 	AndNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return " and "; }
+	virtual std::string myOp() override { return " && "; }
 };
 
 class OrNode : public BinaryExpNode{
@@ -307,7 +307,7 @@ public:
 	OrNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return " or "; }
+	virtual std::string myOp() override { return " || "; }
 };
 
 class EqualsNode : public BinaryExpNode{
@@ -315,7 +315,7 @@ public:
 	EqualsNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return "=="; }
+	virtual std::string myOp() override { return " == "; }
 };
 
 class NotEqualsNode : public BinaryExpNode{
@@ -323,7 +323,7 @@ public:
 	NotEqualsNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return "!="; }
+	virtual std::string myOp() override { return " != "; }
 };
 
 class LessNode : public BinaryExpNode{
@@ -331,7 +331,7 @@ public:
 	LessNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return "<"; }
+	virtual std::string myOp() override { return " < "; }
 };
 
 class GreaterNode : public BinaryExpNode{
@@ -339,7 +339,7 @@ public:
 	GreaterNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return ">"; }
+	virtual std::string myOp() override { return " > "; }
 };
 
 class LessEqNode : public BinaryExpNode{
@@ -347,7 +347,7 @@ public:
 	LessEqNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return "<="; }
+	virtual std::string myOp() override { return " <= "; }
 };
 
 class GreaterEqNode : public BinaryExpNode{
@@ -355,7 +355,7 @@ public:
 	GreaterEqNode(size_t lineIn, size_t colIn,
 		ExpNode * lhs, ExpNode * rhs)
 	: BinaryExpNode(lineIn, colIn, lhs, rhs){ }
-	virtual std::string myOp() override { return ">="; }
+	virtual std::string myOp() override { return " >= "; }
 };
 
 class CallExpNode : public ExpNode{

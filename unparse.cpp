@@ -24,7 +24,7 @@ of DeclNodes.
 void AssignExpNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	myTgt->unparse(out,0);
-	out << "=";
+	out << " = ";
 	mySrc->unparse(out,0);
 
 }
@@ -209,7 +209,7 @@ void FormalDeclNode::unparse(std::ostream& out, int indent){
 
 void FromConsoleStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out<<"FROMCONSOLE";
+	out<<"FROMCONSOLE ";
 	myVal->unparse(out, 0);
 	out<<";\n";
 }
@@ -261,7 +261,7 @@ void ReturnStmtNode::unparse(std::ostream& out, int indent){
 
 void ToConsoleStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out<<"TOCONSOLE";
+	out<<"TOCONSOLE ";
 	myExp->unparse(out, 0);
 	out<<";\n";
 }
