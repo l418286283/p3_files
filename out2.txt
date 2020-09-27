@@ -5,11 +5,8 @@ bool d;
 boolptr x;
 char y;
 charptr g;
-void 0x55ec0af92820({
-	int 0x55ec0af92940}
-){
-				{
-					while (x) {
+void justin(	int a){
+									while (x) {
 						@ptr = @b;
 						m--;
 						n++;
@@ -55,5 +52,4 @@ void 0x55ec0af92820({
 						array[7] = 7;
 					}
 					return (x + 1);
-}
 }

@@ -130,18 +130,16 @@ void NotNode::unparse(std::ostream& out, int indent){
 
 void FormalsListNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << "{\n";
 	for (auto f: *myFormals)
 		f->unparse(out, indent+1);
-	out << "}\n";
 }
 
 void StmtListNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << "{\n";
+//	out << "{t2\n";
 	for (auto s: *myStmts)
 		s->unparse(out, indent+1);
-	out << "}\n";
+//	out << "}\n";
 }
 
 void FnBodyNode::unparse(std::ostream& out, int indent){
@@ -189,7 +187,7 @@ void FnDeclNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	myRe->unparse(out,0);
 	out << " ";
-	out<< getReturnTypeNode();
+	myID->unparse(out,0);
 	out << "(";
 	myFormals->unparse(out, 0);
 	out << ")";
@@ -208,7 +206,8 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 void FormalDeclNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	myType->unparse(out, 0);
-	out << " " << getTypeNode();
+	out << " ";
+	myID->unparse(out, 0);
 }
 
 
