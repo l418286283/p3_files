@@ -446,7 +446,10 @@ public:
 - IDNode (base ID being accessed)*/
 class DerefNode : public LValNode{
 public:
-	DerefNode(size_t line, size_t column, IDNode * Tgt);
+	DerefNode(size_t line, size_t column, IDNode * Tgt)
+	: LValNode(line, column){
+		myTgt = Tgt;
+	}
 	void unparse(std::ostream& out, int indent) override;
 private:
 	IDNode * myTgt;
@@ -457,7 +460,11 @@ private:
 - ExpNode (offset position from the ID start)*/
 class IndexNode : public LValNode{
 public:
-	IndexNode(size_t line, size_t column, IDNode * Tgt, ExpNode * Off);
+	IndexNode(size_t line, size_t column, IDNode * Tgt, ExpNode * Off)
+	: LValNode(line, column){
+		myTgt = Tgt;
+		myOff = Off;
+	}
 	void unparse(std::ostream& out, int indent) override;
 private:
 	IDNode * myTgt;
@@ -468,7 +475,10 @@ private:
 	- IDNode (base ID being accessed)*/
 class RefNode : public LValNode{
 public:
-	RefNode(size_t line, size_t column, IDNode * Tgt);
+	RefNode(size_t line, size_t column, IDNode * Tgt)
+	: LValNode(line, column){
+		myTgt = Tgt;
+	}
 	void unparse(std::ostream& out, int indent) override;
 private:
 	IDNode * myTgt;
