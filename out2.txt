@@ -5,11 +5,11 @@ bool d;
 boolptr x;
 char y;
 charptr g;
-void 0x55e514ff3820({
-	int 0x55e514ff3940}
+void 0x55ec0af92820({
+	int 0x55ec0af92940}
 ){
 				{
-					while(x) {
+					while (x) {
 						@ptr = @b;
 						m--;
 						n++;
@@ -22,22 +22,22 @@ void 0x55e514ff3820({
 						y = (a && y);
 						x = ((3 / 1) + 5);
 						c = (v || d);
-						if((x != 1)) {
+						if ((x == 1)) {
 							y = 3;
 						}
-						if((y != 3)) {
+						if ((y == 3)) {
 							y = 4;
 						} else {
 							b = 1;
 						}
-						while((y != 0)) {
+						while ((y == 0)) {
 							m++;
 						}
 						y = z = f;
-						s = (v == s);
-						g = (d != s);
-						a = (c < f);
-						d = (f <= as);
+						s = (v != s);
+						g = (d == s);
+						a = (c > f);
+						d = (f >= as);
 						f = (f < s);
 						a = (sd <= as);
 						f = (!z);

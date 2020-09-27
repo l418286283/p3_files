@@ -26,7 +26,6 @@ void AssignExpNode::unparse(std::ostream& out, int indent){
 	myTgt->unparse(out,0);
 	out << " = ";
 	mySrc->unparse(out,0);
-
 }
 
 void BinaryExpNode::unparse(std::ostream& out, int indent){
@@ -222,7 +221,7 @@ void FromConsoleStmtNode::unparse(std::ostream& out, int indent){
 
 void IfElseStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << "if(";
+	out << "if (";
 	myExp->unparse(out,0);
 	out << ") {\n";
 	for (auto s: *myStmtsT)
@@ -237,7 +236,7 @@ void IfElseStmtNode::unparse(std::ostream& out, int indent){
 
 void IfStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << "if(";
+	out << "if (";
 	myExp->unparse(out,0);
 	out << ") {\n";
 	for (auto s: *myStmts)
@@ -274,7 +273,7 @@ void ToConsoleStmtNode::unparse(std::ostream& out, int indent){
 
 void WhileStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << "while(";
+	out << "while (";
 	myExp->unparse(out,0);
 	out << ") {\n";
 	for (auto s: *myStmts)
