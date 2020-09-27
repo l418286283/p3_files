@@ -156,15 +156,6 @@ private:
 	IDNode * myId;
 };
 
-class VarDeclListNode : public ASTNode{
-public:
-	VarDeclListNode(std::list<VarDeclNode *> * decls)
-	: ASTNode(0, 0), myDecls(decls){ }
-	virtual void unparse(std::ostream&, int);
-private:
-	std::list<VarDeclNode *> * myDecls;
-};
-
 class IntTypeNode : public TypeNode{
 public:
 	IntTypeNode(size_t lineIn, size_t colIn, bool isRefIn)
