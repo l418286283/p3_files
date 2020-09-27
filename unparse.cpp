@@ -122,14 +122,14 @@ void StmtListNode::unparse(std::ostream& out, int indent){
 		s->unparse(out, indent+1);
 	out << "}\n";
 }
-/*
+
 void FnBodyNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	out << "{\n";
-	myStmtList->(out,indent+4);
+	myStmtList->unparse(out,indent+4);
 	out << "}\n";
 }
-*/
+
 
 void ProgramNode::unparse(std::ostream& out, int indent){
 	/* Oh, hey it's a for-each loop in C++!
