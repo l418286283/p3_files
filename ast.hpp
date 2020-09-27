@@ -380,9 +380,6 @@ public:
 		myChar = token->val();
 	}
 	void unparse(std::ostream& out, int indent) override;
-	std::string getType() {
-		return "charLit";
-	}
 private:
 	char myChar;
 };
@@ -396,9 +393,6 @@ public:
 		myInt = token->num();
 	}
 	void unparse(std::ostream& out, int indent) override;
-	std::string getType() {
-		return "intLit";
-	}
 private:
 	int myInt;
 };
@@ -412,9 +406,6 @@ public:
 		myString = token->str();
 	}
 	void unparse(std::ostream& out, int indent) override;
-	std::string getType() {
-		return "strLit";
-	}
 private:
 	 std::string myString;
 };
@@ -540,11 +531,11 @@ private:
 class FormalDeclNode : public VarDeclNode{
 public:
 	FormalDeclNode(TypeNode * type, IDNode * id)
-	: VarDeclNode(id->line(), id->col(), type, id), myType(type){ }
+	: VarDeclNode(id->line(), id->col(), type, id), myType(type),myID(id){ }
 	void unparse(std::ostream& out, int indent) override;
-	virtual TypeNode * getTypeNode() { return myType; }
 private:
 	TypeNode * myType;
+	IDNode * myID;
 };
 
 class FormalsListNode : public ASTNode{
@@ -596,7 +587,6 @@ public:
 		myFormals = formals;
 		myBody = fnBody;
 	}
-	TypeNode * getReturnTypeNode(){ return myRe; }
 	void unparse(std::ostream& out, int indent) override;
 private:
 	TypeNode * myRe;
