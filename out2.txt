@@ -5,7 +5,7 @@ bool d;
 boolptr x;
 char y;
 charptr g;
-void justin(	int a){
+void justin(	int a,	bool b,	char c){
 									while (x) {
 						@ptr = @b;
 						m--;
@@ -42,7 +42,7 @@ void justin(	int a){
 						m = a[(3 - 5)];
 						^k = a;
 						ptr = ^val;
-						@ptr = justin(a);
+						@ptr = justin(a,b,c);
 						justin(g);
 						justin();
 						g = NULLPTR;
