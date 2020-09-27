@@ -591,16 +591,18 @@ public:
 		FnBodyNode * fnBody)
 		: DeclNode(id->line(),id->col())
 	{
+		myRe = re;
+		myID = id;
 		myFormals = formals;
 		myBody = fnBody;
-		myRe = re;
 	}
 	TypeNode * getReturnTypeNode(){ return myRe; }
 	void unparse(std::ostream& out, int indent) override;
 private:
+	TypeNode * myRe;
+	IDNode * myID;
 	FormalsListNode * myFormals;
 	FnBodyNode * myBody;
-	TypeNode * myRe;
 };
 
 /*class FromConsoleStmtNode
