@@ -261,13 +261,13 @@ formals 	: LPAREN RPAREN
 formalsList	: formalDecl
 		  {
 		  std::list<FormalDeclNode *> * list = new std::list<FormalDeclNode *>();
-          list->push_back($1);
-          $$ = list;
+			list->push_back($1);
+			$$ = list;
 		  }
 		| formalDecl COMMA formalsList
 		  {
 		  $3->push_front($1);
-          $$ = $3;
+			$$ = $3;
 		  }
 
 formalDecl 	: type id
