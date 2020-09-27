@@ -221,6 +221,9 @@ void IfElseStmtNode::unparse(std::ostream& out, int indent){
 	for (auto s: *myStmtsT)
 		s->unparse(out, indent+1);
 	doIndent(out, indent);
+	out << "}\n";
+	doIndent(out, indent);
+	out << "else {\n";
 	for (auto s: *myStmtsF)
 		s->unparse(out, indent+1);
 	doIndent(out, indent);
@@ -252,9 +255,10 @@ void PostIncStmtNode::unparse(std::ostream& out, int indent){
 
 void ReturnStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out<<"return";
-
+	out<<"return ";
+	out<<"(";
 	if(myExp != nullptr){ myExp->unparse(out, 0); }
+	out<<")";
 	out<<";\n";
 }
 
