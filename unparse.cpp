@@ -107,6 +107,22 @@ void UnaryExpNode::unparse(std::ostream& out, int indent){
 
 }
 
+void NegNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	out << "-";
+	myExp->unparse(out,0);
+	out << ")";
+}
+
+void NotNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	out << "!";
+	myExp->unparse(out,0);
+	out << ")";
+}
+
 void FormalsListNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	out << "{\n";
